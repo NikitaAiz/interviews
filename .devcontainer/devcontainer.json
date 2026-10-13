@@ -50,7 +50,7 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "terminal.integrated.defaultProfile.linux": "bash",
         // Turns Copilot off by default (the user can still re-enable it)
-        "github.copilot.enable": { "*": true },
+        "github.copilot.enable": { "*": false },
 
         // ---------- Live Share: maximum allowance, minimum prompts ----------
         // Guests join directly from the link, no approval prompt
