@@ -1,0 +1,78 @@
+// Place this file at: .devcontainer/devcontainer.json in your repo
+// devcontainer.json supports comments (JSONC).
+{
+  // Name shown in the Codespaces UI
+  "name": "Interview Environment (Node.js)",
+
+  // Base image: Node.js 22 on Debian Bookworm, maintained by Microsoft
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
+
+  // Extra tools installed into the container
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+    // Add more if needed, e.g.:
+    // "ghcr.io/devcontainers/features/python:1": { "version": "3.12" }
+  },
+
+  // Smallest machine is enough for most interviews (saves core-hours)
+  "hostRequirements": {
+    "cpus": 2,
+    "memory": "4gb",
+    "storage": "32gb"
+  },
+
+  // Webserver port: forwarded automatically when the codespace starts
+  "forwardPorts": [3000],
+  "portsAttributes": {
+    "3000": {
+      "label": "Web server",
+      "onAutoForward": "notify"
+    }
+  },
+
+  // Runs once when the codespace is created: install dependencies
+  "postCreateCommand": "npm install",
+
+  // Don't let the user start working until setup is finished
+  "waitFor": "postCreateCommand",
+
+  // Editor setup
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-vsliveshare.vsliveshare"
+      ],
+      "settings": {
+        // ---------- Editor ----------
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "terminal.integrated.defaultProfile.linux": "bash",
+        // Turns Copilot off by default (the user can still re-enable it)
+        "github.copilot.enable": { "*": false },
+
+        // ---------- Live Share: maximum allowance, minimum prompts ----------
+        // Guests join directly from the link, no approval prompt
+        "liveshare.guestApprovalRequired": false,
+        // Guests joining from a browser without signing in are accepted automatically
+        "liveshare.anonymousGuestApproval": "accept",
+        // Guests can run tasks (e.g. npm scripts) and start/control debugging
+        "liveshare.allowGuestTaskControl": true,
+        "liveshare.allowGuestDebugControl": true,
+        // Guests can run language commands (refactor, quick fixes, etc.)
+        "liveshare.languages.allowGuestCommandControl": true,
+        // Terminals are shared automatically when the session starts
+        // (write access to a terminal still has to be granted in-session)
+        "liveshare.autoShareTerminals": true
+      }
+    },
+    "codespaces": {
+      // Files opened automatically when the codespace starts
+      "openFiles": ["README.md", "src/index.js"]
+    }
+  },
+
+  // Run as the non-root "node" user that ships with the image
+  "remoteUser": "node"
+}

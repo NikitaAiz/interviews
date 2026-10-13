@@ -1,0 +1,17 @@
+# This is Git's per-user configuration file. Comments start with a hash (#) or semicolon (;).
+
+[user]
+    # Your name, which will be immutably baked into your commits.
+    name = Eliel Gez
+    # Your email address, used to link commits to your GitHub account.
+    email = eliel7114@gmail.com
+    # Optional GPG signing key ID for commit verification.
+    # signingkey = A1B2C3D4E5F67890
+
+[credential]
+    # Configures a credential helper to cache login information (e.g., password or token).
+    helper = cache --timeout=3600
+    # For macOS
+    # helper = osxkeychain
+    # For Windows
+    # helper = manager-core
